@@ -25,7 +25,7 @@ import { useNavigate } from 'react-router-dom';
   };
 
   return (
-    <div className="container bg-dark text-white border-0 rounded align-content-lg-center p-5 ">
+    <div className="container text-white border-0 rounded align-content-lg-center justify-content-center p-5 ">
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group-row">

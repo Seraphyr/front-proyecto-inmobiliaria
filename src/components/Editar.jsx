@@ -42,21 +42,25 @@ export default function Editar() {
     }
     return (
         <div>
-            <h1>Editar Inmueble {id}</h1>
+            
             {inmueble && (
-                <form onSubmit={editarInmueble}>
-                    <label htmlFor="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" defaultValue={inmueble.nombre} onChange={handleOnChange} />
-                    <label htmlFor="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" defaultValue={inmueble.direccion} onChange={handleOnChange} />
-                    <label htmlFor="metrosCuadrados">Metros Cuadrados:</label>
-                    <input type="number" id="metrosCuadrados" name="metrosCuadrados" defaultValue={inmueble.metrosCuadrados} onChange={handleOnChange} />
-                    <label htmlFor="precio">Precio:</label>
-                    <input type="number" id="precio" name="precio" defaultValue={inmueble.precioVenta} onChange={handleOnChange} />
-                    <button type="submit">Editar</button>
-                </form>
+                <div className="container  text-white border-0 rounded align-content-lg-center p-5 col-3">
+                    <h1 className="text-white">Editar Inmueble {id}</h1>
+                    <form onSubmit={editarInmueble} className="form-group ">
+                        <label htmlFor="nombre" className='form-label text-light form-text '>Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" defaultValue={inmueble.nombre} onChange={handleOnChange} className='form-control' />
+                        <label htmlFor="direccion" className='form-label text-light form-text '>Dirección:</label>
+                        <input type="text" id="direccion" name="direccion" defaultValue={inmueble.direccion} onChange={handleOnChange} className='form-control' />
+                        <label htmlFor="metrosCuadrados" className='form-label text-light form-text '>Metros Cuadrados:</label>
+                        <input type="number" id="metrosCuadrados" name="metrosCuadrados" defaultValue={inmueble.metrosCuadrados} onChange={handleOnChange} className='form-control' />
+                        <label htmlFor="precio" className='form-label text-light form-text '>Precio:</label>
+                        <input type="number" id="precio" name="precio" defaultValue={inmueble.precioVenta} onChange={handleOnChange} className='form-control' />
+                        <button type="submit" className="btn">Editar</button>
+                    </form>
+                    <button onClick={() => window.history.back()} className="btn">Volver</button>
+                </div>
             )}
-            <button onClick={() => window.history.back()}>Volver</button>
+
         </div>
     )
 }

@@ -58,17 +58,28 @@ const Home = () => {
         obtenerInmuebles();
     }
 
- /*    const actualizarInmueble = async (event) => {
+    const actualizarInmueble = async (event, id) => {
         event.preventDefault();
         const form = event.target;
         const inmueble = {
-            id: form.id.value,
             nombre: form.nombre.value,
             direccion: form.direccion.value,
             metrosCuadrados: form.metrosCuadrados.value,
             precioVenta: form.precioVenta.value,
+
         }
-    } */
+        const response = await fetch(`http://localhost:3001/inmuebles/editar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': Cookies.get('token')
+            }
+        })
+        const data = await response.json();
+        console.log(data);
+        obtenerInmuebles();
+    }
 
 
 
@@ -77,7 +88,7 @@ const Home = () => {
         obtenerInmuebles();
         agregarInmueble();
         eliminarInmueble();
-
+        actualizarInmueble();
     }, []);
 
 
