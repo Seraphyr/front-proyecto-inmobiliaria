@@ -70,6 +70,9 @@ const Home = () => {
         }
     } */
 
+
+
+
     useEffect(() => {
         obtenerInmuebles();
         agregarInmueble();
@@ -81,7 +84,7 @@ const Home = () => {
 
     return (
         <div className='container text-light '>
-            <h1>Home</h1>
+            <h1>Bienvenidos a INMUEBLES SRL</h1>
 
             <h2>Inmuebles</h2>
             {inmuebles.length > 0 ? (
