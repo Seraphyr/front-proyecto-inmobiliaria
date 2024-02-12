@@ -1,5 +1,5 @@
-import './Home.css'
-import Cookies from 'js-cookie'
+import './Home.css';
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -58,108 +58,71 @@ const Home = () => {
         obtenerInmuebles();
     }
 
-    const actualizarInmueble = async (event, id) => {
-        event.preventDefault();
-        const form = event.target;
-        const inmueble = {
-            nombre: form.nombre.value,
-            direccion: form.direccion.value,
-            metrosCuadrados: form.metrosCuadrados.value,
-            precioVenta: form.precioVenta.value,
-
-        }
-        const response = await fetch(`http://localhost:3001/inmuebles/editar/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': Cookies.get('token')
-            }
-        })
-        const data = await response.json();
-        console.log(data);
-        obtenerInmuebles();
-    }
-
-
-
+    
 
     useEffect(() => {
         obtenerInmuebles();
-        agregarInmueble();
         eliminarInmueble();
-        actualizarInmueble();
+        agregarInmueble();
     }, []);
 
-
-
     return (
-        <div className='container text-light '>
+        <div className='container text-light'>
             <h1>Bienvenidos a INMUEBLES SRL</h1>
 
             <h2>Inmuebles</h2>
             {inmuebles.length > 0 ? (
-                inmuebles.map((inmueble) => (
-                    <div className="container">
-                        <table key={inmueble.id} className="table table-dark table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Dirección</th>
-                                    <th>Metros cuadrados</th>
-                                    <th>Precio de venta</th>
-                                    <th>Eliminar</th>
-                                    <th>Editar</th>
-                                </tr>
-                            </thead>
+                <div className="container">
+                    <table className="table table-dark table-striped">
+                        <thead>
                             <tr>
-                                <td>{inmueble.id}</td>
-                                <td>{inmueble.nombre}</td>
-                                <td>{inmueble.direccion}</td>
-                                <td>{inmueble.metrosCuadrados}</td>
-                                <td>{inmueble.precioVenta}</td>
-                                <td><button type="button" className="btn btn-danger" onClick={() => eliminarInmueble(inmueble.id)}>Eliminar</button></td>
-                                <td><button type="button" className="btn btn-primary" onClick={() => navigate(`/editar/${inmueble.id}`)}>Editar</button></td>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Metros cuadrados</th>
+                                <th>Precio de venta</th>
+                                <th>Eliminar</th>
+                                <th>Editar</th>
                             </tr>
-
-                        </table>
-                    </div>
-
-                ))
+                        </thead>
+                        <tbody>
+                            {inmuebles.map((inmueble) => (
+                                <tr key={inmueble.id}>
+                                    <td>{inmueble.id}</td>
+                                    <td>{inmueble.nombre}</td>
+                                    <td>{inmueble.direccion}</td>
+                                    <td>{inmueble.metrosCuadrados}</td>
+                                    <td>{inmueble.precioVenta}</td>
+                                    <td><button type="button" className="btn btn-danger" onClick={() => eliminarInmueble(inmueble.id)}>Eliminar</button></td>
+                                    <td><button type="button" className="btn btn-primary" onClick={() => navigate(`/editar/${inmueble.id}`)}>Editar</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             ) : (
                 <p>No hay inmuebles disponibles</p>
             )}
             <div className="container">
                 <h1>Agregar Inmueble</h1>
-                
-                <form >
-                    <div className="form-row" onSubmit={agregarInmueble}>
+                <form onSubmit={agregarInmueble}>
+                    <div className="form-row">
                         <div className="col-md-3 mb-3">
                             <label htmlFor="validationDefault01">Nombre</label>
                             <input type="text" className="form-control" id="validationDefault01" placeholder="Casa-1" required />
-
-
                             <label htmlFor="validationDefault02">Dirección</label>
-                            <input type="text" className="form-control" id="validationDefault02" placeholder="Calle 1"  required />
-
-
+                            <input type="text" className="form-control" id="validationDefault02" placeholder="Calle 1" required />
                             <label >Metros Cuadrados</label>
                             <input type="number" className="form-control" id="validationDefault05" placeholder="100" required />
-
-                            <label for="validationDefault05">Precio de venta en U$S</label>
+                            <label htmlFor="validationDefault05">Precio de venta en U$S</label>
                             <input type="number" className="form-control" id="validationDefault05" placeholder="50000" required />
                         </div>
-
                     </div>
-                    <button className="btn btn-primary" type="submit">Agregar</button>
+                    <button className="btn btn-primary" type="submit" onSubmit={agregarInmueble}>Agregar</button>
                 </form>
                 <button type="button" className="btn btn-secondary" onClick={logout}>Logout</button>
-
             </div>
-
         </div>
-
     )
 }
 
